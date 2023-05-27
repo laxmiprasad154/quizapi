@@ -30,7 +30,7 @@ namespace quizapi.Controllers
                 {
                     QnId = x.QnId,
                     QnInWords = x.QnInWords,
-                    ImageName = x.ImageName,
+                    
                     Options = new string[] { x.Option1, x.Option2, x.Option3, x.Option4 }
                 })
                 .OrderBy(y => Guid.NewGuid())

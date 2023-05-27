@@ -35,7 +35,7 @@ namespace quizapi.Controllers
         public IActionResult Login(AddAuthUserLoginDTO loginModel)
         {
 
-            var user = context.Users.Include(x => x.UserRole).SingleOrDefault(x => x.Email == loginModel.Email);
+            var user = context.Users.Include(x => x.UserRoleId).SingleOrDefault(x => x.Email == loginModel.Email);
 
             if (user is null)
                 return Unauthorized("Invalid Username or Password!");

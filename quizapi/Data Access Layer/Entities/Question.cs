@@ -7,10 +7,9 @@ namespace quizapi.Data_Access_Layer.Entities
     {
         [Key]
         public int QnId { get; set; }
-        [Column(TypeName = "nvarchar(250)")]
+        [Column(TypeName = "nvarchar(MAX)")]
         public string QnInWords { get; set; }
-        [Column(TypeName = "nvarchar(50)")]
-        public string? ImageName { get; set; }
+      
         [Column(TypeName = "nvarchar(50)")]
         public string Option1 { get; set; }
         [Column(TypeName = "nvarchar(50)")]
@@ -22,9 +21,7 @@ namespace quizapi.Data_Access_Layer.Entities
 
         public int Answer { get; set; }
 
-        [Required]
-        [ForeignKey("User")]
-        public int UserId { get; set; }
-        public virtual User User { get; set; }
+        
+       
     }
 }

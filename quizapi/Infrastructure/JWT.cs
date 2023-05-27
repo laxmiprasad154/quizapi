@@ -14,8 +14,8 @@ namespace quizapi.Infrastructure
     {
         public static string GenerateToken(Dictionary<string, string> claimsToBeAdded, string key)
         {
-            var tokenHandler = new JwtSecurityTokenHandler();
-            var tokenKey = Encoding.ASCII.GetBytes(key);
+            var TokenHandler = new JwtSecurityTokenHandler();
+            var TokenKey = Encoding.ASCII.GetBytes(key);
             var expiresAt = DateTime.Now.AddDays(30);
 
             var claimsIdentity = new ClaimsIdentity();
@@ -24,16 +24,16 @@ namespace quizapi.Infrastructure
                 claimsIdentity.AddClaim(new Claim(item.Key, item.Value));
             }
 
-            var tokenDescriptor = new SecurityTokenDescriptor()
+            var TokenDescriptor = new SecurityTokenDescriptor()
             {
                 Subject = claimsIdentity,
                 Expires = expiresAt,
                 SigningCredentials = new SigningCredentials(
-                    new SymmetricSecurityKey(tokenKey), SecurityAlgorithms.HmacSha256Signature),
+                    new SymmetricSecurityKey(TokenKey), SecurityAlgorithms.HmacSha256Signature),
             };
 
-            var token = tokenHandler.CreateToken(tokenDescriptor);
-            return tokenHandler.WriteToken(token);
+            var Token = TokenHandler.CreateToken(TokenDescriptor);
+            return TokenHandler.WriteToken(Token);
         }
     }
 }

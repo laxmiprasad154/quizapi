@@ -32,7 +32,5 @@ namespace quizapi.Data_Access_Layer.Entities
         [ForeignKey("UserRole")]
         public int UserRoleId { get; set; }
         public virtual UserRole UserRole { get; set; }
-
-
     }
 }

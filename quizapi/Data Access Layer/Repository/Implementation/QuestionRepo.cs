@@ -24,12 +24,12 @@ namespace quizapi.Data_Access_Layer.Repository.Implementation
 
         async Task<List<Question>> IQuestionListingRep.GetAllAsync()
         {
-            return await dbContext.Questions.Include("User").ToListAsync();
+            return await dbContext.Questions.ToListAsync();
         }
 
         async Task<Question> IQuestionListingRep.GetByIdAsync(int id)
         {
-            return await dbContext.Questions.Include("User").FirstOrDefaultAsync(x => x.QnId == id);
+            return await dbContext.Questions.FirstOrDefaultAsync(x => x.QnId == id);
         }
 
         public async Task<Question> UpdateAsync(int id, Question Question)
