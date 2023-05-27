@@ -1,6 +1,6 @@
 ﻿using quizapi.Data_Access_Layer.Entities;
 
-namespace quizapi.Data_Access_Layer.Repository
+namespace quizapi.Data_Access_Layer.Repository.Interface
 {
     public interface IUserRep
     {

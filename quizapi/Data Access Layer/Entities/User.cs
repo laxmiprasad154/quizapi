@@ -29,7 +29,7 @@ namespace quizapi.Data_Access_Layer.Entities
         public string LName { get; set; }
 
         [Required]
-        [ForeignKey("UserRole")]
+        [ForeignKey("UserRoleId")]
         public int UserRoleId { get; set; }
         public virtual UserRole UserRole { get; set; }
     }

@@ -5,7 +5,7 @@ using quizapi.Data_Access_Layer.Entities;
 using System.Security.Claims;
 using Microsoft.EntityFrameworkCore;
 using quizapi.Data_Access_Layer.context;
-using quizapi.Data_Access_Layer.Repository;
+using quizapi.Data_Access_Layer.Repository.Interface;
 using quizapi.Infrastructure;
 using IdentityModel;
 
@@ -35,7 +35,8 @@ namespace quizapi.Controllers
         public IActionResult Login(AddAuthUserLoginDTO loginModel)
         {
 
-            var user = context.Users.Include(x => x.UserRoleId).SingleOrDefault(x => x.Email == loginModel.Email);
+            var user = context.Users.SingleOrDefault(x => x.Email == loginModel.Email);
+            var userRole = context.UserRoles.SingleOrDefault(x => x.UserRoleId == user.UserRoleId);
 
             if (user is null)
                 return Unauthorized("Invalid Username or Password!");
@@ -45,8 +46,8 @@ namespace quizapi.Controllers
             {
 
                 var token = JWT.GenerateToken(new Dictionary<string, string> {
-                { ClaimTypes.Role, user.UserRole.UserRolesName  },
-                { "RoleId", user.UserRole.UserRoleId.ToString() },
+                { ClaimTypes.Role, userRole.UserRolesName  },
+                { "RoleId", userRole.UserRoleId.ToString() },
                 { JwtClaimTypes.PreferredUserName, user.UserName },
                 { JwtClaimTypes.Id, user.UserId.ToString() },
                 { JwtClaimTypes.Email, user.Email}

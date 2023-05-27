@@ -1,6 +1,7 @@
 ﻿using quizapi.Data_Access_Layer.context;
 using quizapi.Data_Access_Layer.Entities;
 ﻿using Microsoft.EntityFrameworkCore;
+using quizapi.Data_Access_Layer.Repository.Interface;
 
 namespace quizapi.Data_Access_Layer.Repository.Implementation
 {

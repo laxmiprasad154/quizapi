@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using quizapi.Data_Access_Layer.Repository.Implementation;
+using quizapi.Data_Access_Layer.Repository.Interface;
 using quizapi.Infrastructure;
 using System.Text;
 

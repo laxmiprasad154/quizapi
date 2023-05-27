@@ -3,8 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using quizapi.Business_Logic_Layer.DTO;
 using quizapi.Data_Access_Layer.Entities;
 using AutoMapper;
-using quizapi.Data_Access_Layer.Repository;
-using quizapi.Data_Access_Layer.Repository.Implementation;
+using quizapi.Data_Access_Layer.Repository.Interface;
 
 namespace quizapi.Controllers
 {
