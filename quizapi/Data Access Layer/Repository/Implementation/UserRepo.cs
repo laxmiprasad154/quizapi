@@ -65,6 +65,8 @@ namespace quizapi.Data_Access_Layer.Repository.Implementation
             existingUser.Password = user.Password;
             existingUser.FName = user.FName;
             existingUser.LName = user.LName;
+            existingUser.Score = user.Score;
+            existingUser.TimeTaken = user.TimeTaken;
             existingUser.UserRoleId = user.UserRoleId;
 
             await dbContext.SaveChangesAsync();

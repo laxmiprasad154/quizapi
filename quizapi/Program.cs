@@ -14,6 +14,7 @@ using Swashbuckle.AspNetCore.Filters;
 using quizapi.Data_Access_Layer.context;
 using quizapi.Data_Access_Layer.Repository;
 using quizapi.Infrastructure.Middleware;
+using Microsoft.Extensions.FileProviders;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -81,9 +82,16 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseMiddleware<ExceptionHandler>();
+app.UseCors(options =>
+options.WithOrigins("http://localhost:3000")
+.AllowAnyMethod()
+.AllowAnyHeader());
 
-app.UseHttpsRedirection();
+
+
+//app.UseMiddleware<ExceptionHandler>();
+
+
 
 app.UseAuthentication();
 

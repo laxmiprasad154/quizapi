@@ -30,6 +30,9 @@ namespace quizapi.Business_Logic_Layer.DTO
         [MaxLength(50)]
         public string LName { get; set; }
 
+        public int Score { get; set; }
+        public int TimeTaken { get;set; }
+
         [Required]
         [ForeignKey("UserRole")]
         public int UserRoleId { get; set; }

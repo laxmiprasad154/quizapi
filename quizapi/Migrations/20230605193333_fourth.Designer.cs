@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using quizapi.Data_Access_Layer.context;
 
@@ -10,9 +11,10 @@ using quizapi.Data_Access_Layer.context;
 namespace quizapi.Migrations
 {
     [DbContext(typeof(Quizdbcontext))]
-    partial class QuizdbcontextModelSnapshot : ModelSnapshot
+    [Migration("20230605193333_fourth")]
+    partial class fourth
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

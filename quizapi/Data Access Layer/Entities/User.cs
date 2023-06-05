@@ -27,6 +27,8 @@ namespace quizapi.Data_Access_Layer.Entities
         [Required]
         [MaxLength(50)]
         public string LName { get; set; }
+        public int Score { get; set; }
+        public int TimeTaken { get;set; }
 
         [Required]
         [ForeignKey("UserRoleId")]

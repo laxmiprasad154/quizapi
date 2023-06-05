@@ -30,7 +30,7 @@ namespace quizapi.Data_Access_Layer.context
         new UserRole
         {
             UserRoleId = 2, // Update with the correct primary key value
-            UserRolesName = "participant"
+            UserRolesName = "Participant"
         }
          
         );
