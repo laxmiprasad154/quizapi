@@ -55,7 +55,7 @@ namespace quizapi.Data_Access_Layer.Repository.Implementation
 
         public async Task<User> UpdateAsync(int id, User user)
         {
-            var existingUser = await dbContext.Users.FirstOrDefaultAsync(x => x.UserId == id);
+            var existingUser = await dbContext.Users.Include("UserRole").FirstOrDefaultAsync(x => x.UserId == id);
             if (existingUser == null)
             {
                 return null;
