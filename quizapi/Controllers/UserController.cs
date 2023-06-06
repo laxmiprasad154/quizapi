@@ -12,6 +12,7 @@ using System.Security.Claims;
 using Microsoft.EntityFrameworkCore;
 
 
+
 namespace quizapi.Controllers
 {
     [Route("api/[controller]")]
@@ -68,7 +69,7 @@ namespace quizapi.Controllers
 
         }
 
-        [HttpPut]
+       /* [HttpPut]
         [Route("{id:int}")]
 
 
@@ -82,6 +83,50 @@ namespace quizapi.Controllers
             }
             return Ok(mapper.Map<UserDTO>(userEntity));
         }
+       */
+
+        [HttpPut]
+        [Route("{id:int}")]
+        public async Task<IActionResult> Update([FromRoute] int id, UpdateUserRequestDTO updateUserRequestDTO)
+        {
+            var userEntity = mapper.Map<User>(updateUserRequestDTO);
+
+            var existingUser = await context.Users.FindAsync(id);
+
+            if (existingUser == null)
+            {
+                return NotFound();
+            }
+
+            existingUser.Score = userEntity.Score;
+            existingUser.TimeTaken = userEntity.TimeTaken;
+
+            context.Entry(existingUser).State = EntityState.Modified;
+
+            try
+            {
+                await context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!UserExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return Ok(mapper.Map<UserDTO>(existingUser));
+        }
+        private bool UserExists(int id)
+        {
+            return context.Users.Any(e => e.UserId == id);
+        }
+
+
 
         [HttpDelete]
         [Route("{id:int}/admin")]

@@ -10,7 +10,7 @@ namespace quizapi.Data_Access_Layer.context
 {
     public class Quizdbcontext : DbContext
     {
-        public Quizdbcontext(DbContextOptions options) : base(options)
+        public Quizdbcontext(DbContextOptions<Quizdbcontext> options) : base(options)
         {
 
         }
