@@ -37,4 +37,13 @@ namespace quizapi.Business_Logic_Layer.DTO
         [ForeignKey("UserRole")]
         public int UserRoleId { get; set; }
     }
+
+    public class UserResultDTO
+    {
+      
+        public int Score { get; set; }
+        public int TimeTaken { get; set; }
+
+
+    }
 }

@@ -87,9 +87,9 @@ namespace quizapi.Controllers
 
         [HttpPut]
         [Route("{id:int}")]
-        public async Task<IActionResult> Update([FromRoute] int id, UpdateUserRequestDTO updateUserRequestDTO)
+        public async Task<IActionResult> Update([FromRoute] int id, UserResultDTO updateUserRequestDTO)
         {
-            var userEntity = mapper.Map<User>(updateUserRequestDTO);
+           
 
             var existingUser = await context.Users.FindAsync(id);
 
@@ -98,8 +98,8 @@ namespace quizapi.Controllers
                 return NotFound();
             }
 
-            existingUser.Score = userEntity.Score;
-            existingUser.TimeTaken = userEntity.TimeTaken;
+            existingUser.Score = updateUserRequestDTO.Score;
+            existingUser.TimeTaken = updateUserRequestDTO.TimeTaken;
 
             context.Entry(existingUser).State = EntityState.Modified;
 
@@ -119,7 +119,7 @@ namespace quizapi.Controllers
                 }
             }
 
-            return Ok(mapper.Map<UserDTO>(existingUser));
+            return NoContent();
         }
         private bool UserExists(int id)
         {
@@ -172,7 +172,7 @@ namespace quizapi.Controllers
 
 
 
-                    return Ok(new AddAuthResponseDTO { token = token, UserName = user.UserName, role = user.UserRoleId });
+                    return Ok(new AddAuthResponseDTO { token = token, UserId = user.UserId, role = user.UserRoleId });
                 }
                 else
                 {
