@@ -1,4 +1,5 @@
 ﻿
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using quizapi.Data_Access_Layer.context;
@@ -16,9 +17,22 @@ namespace quizapi.Controllers
         {
             _context = context;
         }
-
-        // GET: api/Question
+        [Authorize(Roles = "Admin")]
         [HttpGet]
+        public async Task<ActionResult<IEnumerable<Question>>> GetQuestionss()
+        {
+            var questions = await _context.Questions.ToListAsync();
+
+            if (questions == null || questions.Count == 0)
+            {
+                return NotFound();
+            }
+
+            return Ok(questions);
+        }
+        [Authorize(Roles = "Participant")]
+        // GET: api/Question
+        [HttpGet("random")]
         public async Task<ActionResult<IEnumerable<Question>>> GetQuestions()
         {
             if (_context.Questions == null)
@@ -39,7 +53,8 @@ namespace quizapi.Controllers
             return Ok(random5Qns);
         }
 
-        // GET: api/Question/5
+        [Authorize(Roles = "Admin")]
+        
         [HttpGet("{id}")]
         public async Task<ActionResult<Question>> GetQuestion(int id)
         {
@@ -59,6 +74,7 @@ namespace quizapi.Controllers
 
         // PUT: api/Question/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [Authorize(Roles = "Admin")]
         [HttpPut("{id}")]
         public async Task<IActionResult> PutQuestion(int id, Question question)
         {
@@ -90,6 +106,7 @@ namespace quizapi.Controllers
 
         // POST: api/Question
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public IActionResult AddQuestion([FromBody] Question question)
         {
@@ -117,6 +134,7 @@ namespace quizapi.Controllers
         }
 
         // DELETE: api/Question/5
+        [Authorize(Roles = "Admin")]
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteQuestion(int id)
         {
