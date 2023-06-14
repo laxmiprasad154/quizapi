@@ -141,7 +141,7 @@ namespace quizapi.Controllers
                   return Unauthorized("Invalid Username or Password!");
 
                         string hashedPassword = HashPassword(loginModel.Password);
-                        if (BCrypt.Net.BCrypt.Verify(loginModel.Password, hashedPassword))
+                        if (BCrypt.Net.BCrypt.Verify(loginModel.Password, user.Password))
                         {
 
                             var token = JWT.GenerateToken(new Dictionary<string, string> {
